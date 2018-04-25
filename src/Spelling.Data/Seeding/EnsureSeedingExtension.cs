@@ -57,6 +57,7 @@ namespace Spelling.Data.Seeding
         private static void Seed(SpellingContext context, IHostingEnvironment host, IApplicationBuilder builder)
         {
             SeedUsers.Seed(context);
+            SeedWords.Seed(context);
         }
     }
 }

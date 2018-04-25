@@ -13,11 +13,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Beto.Core.Data", "..\ext\be
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Beto.Core.Web", "..\ext\beto.core\src\Beto.Core.Web\Beto.Core.Web.csproj", "{3744148A-A74D-4D58-98C7-66186AA260D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spelling.Data", "Spelling.Data\Spelling.Data.csproj", "{0406A888-E1C1-4AFF-B0BD-A52A69556B30}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spelling.Data", "Spelling.Data\Spelling.Data.csproj", "{0406A888-E1C1-4AFF-B0BD-A52A69556B30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spelling.Domain", "Spelling.Domain\Spelling.Domain.csproj", "{E6A1BA9E-77C6-4248-A96D-1D2C7944C48F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spelling.Domain", "Spelling.Domain\Spelling.Domain.csproj", "{E6A1BA9E-77C6-4248-A96D-1D2C7944C48F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spelling.Business", "Spelling.Business\Spelling.Business.csproj", "{CA7E514B-EB63-410F-8BF0-363A8B821A5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spelling.Business", "Spelling.Business\Spelling.Business.csproj", "{CA7E514B-EB63-410F-8BF0-363A8B821A5E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spelling.Models", "Spelling.Models\Spelling.Models.csproj", "{60B70844-2830-486D-ACB5-66624AF8CC1D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{CA7E514B-EB63-410F-8BF0-363A8B821A5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA7E514B-EB63-410F-8BF0-363A8B821A5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA7E514B-EB63-410F-8BF0-363A8B821A5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60B70844-2830-486D-ACB5-66624AF8CC1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60B70844-2830-486D-ACB5-66624AF8CC1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60B70844-2830-486D-ACB5-66624AF8CC1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60B70844-2830-486D-ACB5-66624AF8CC1D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

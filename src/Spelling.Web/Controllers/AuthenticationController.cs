@@ -3,7 +3,7 @@
 //     Company copyright tag.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace Spelling.Web.Controller
+namespace Spelling.Web.Controllers
 {
     using Beto.Core.Exceptions;
     using Beto.Core.Web.Api.Controllers;

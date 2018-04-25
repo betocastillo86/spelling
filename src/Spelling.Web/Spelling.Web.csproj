@@ -21,6 +21,7 @@
     <ProjectReference Include="..\Spelling.Business\Spelling.Business.csproj" />
     <ProjectReference Include="..\Spelling.Data\Spelling.Data.csproj" />
     <ProjectReference Include="..\Spelling.Domain\Spelling.Domain.csproj" />
+    <ProjectReference Include="..\Spelling.Models\Spelling.Models.csproj" />
   </ItemGroup>
 
 </Project>
