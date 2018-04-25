@@ -43,6 +43,8 @@ namespace Spelling.Web.Infraestructure
 
             services.AddScoped<IWordService, WordService>();
 
+            services.AddScoped<IGameService, GameService>();
+
             services.AddScoped<ILoggerService, LogService>();
 
             //// Core

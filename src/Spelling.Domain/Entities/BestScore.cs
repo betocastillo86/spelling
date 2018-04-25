@@ -55,6 +55,14 @@ namespace Spelling.Domain
         public int Time { get; set; }
 
         /// <summary>
+        /// Gets or sets the game creation date.
+        /// </summary>
+        /// <value>
+        /// The game creation date.
+        /// </value>
+        public DateTime GameCreationDate { get; set; }
+
+        /// <summary>
         /// Gets or sets the type of the group.
         /// </summary>
         /// <value>

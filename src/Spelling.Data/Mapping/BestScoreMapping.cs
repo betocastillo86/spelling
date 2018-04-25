@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------
 namespace Spelling.Data.Mapping
 {
+    using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
     using Spelling.Domain;
 
@@ -19,6 +20,8 @@ namespace Spelling.Data.Mapping
         /// <param name="entity">The entity.</param>
         public static void Map(this EntityTypeBuilder<BestScore> entity)
         {
+            entity.Property(e => e.GameCreationDate)
+                .HasColumnType("datetime");
         }
     }
 }

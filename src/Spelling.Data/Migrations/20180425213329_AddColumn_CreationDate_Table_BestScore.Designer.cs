@@ -11,9 +11,10 @@ using System;
 namespace Spelling.Data.Migrations
 {
     [DbContext(typeof(SpellingContext))]
-    partial class SpellingContextModelSnapshot : ModelSnapshot
+    [Migration("20180425213329_AddColumn_CreationDate_Table_BestScore")]
+    partial class AddColumn_CreationDate_Table_BestScore
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
