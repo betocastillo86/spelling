@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\ext\beto.core\src\Beto.Core.Data\Beto.Core.Data.csproj" />
+    <ProjectReference Include="..\..\ext\beto.core\src\Beto.Core\Beto.Core.csproj" />
+  </ItemGroup>
+
+</Project>
