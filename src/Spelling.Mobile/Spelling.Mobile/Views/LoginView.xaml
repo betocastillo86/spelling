@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Spelling.Mobile.Views.Login">
+             x:Class="Spelling.Mobile.Views.LoginView">
     <StackLayout>
         <Label Text="Email"></Label>
         <Entry Placeholder="Ingresa tu correo" Text="{Binding Model.Email}"></Entry>

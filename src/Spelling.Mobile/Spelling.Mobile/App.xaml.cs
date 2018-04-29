@@ -24,7 +24,7 @@ namespace Spelling.Mobile
 
             ServiceRegister.Instance.Build();
 
-            this.MainPage = new Login();
+            this.MainPage = new LoginView();
         }
 
         /// <summary>

@@ -58,6 +58,11 @@ namespace Spelling.Mobile.ViewModels
         private string timerText = null;
 
         /// <summary>
+        /// The user answer
+        /// </summary>
+        private string userAnswer = null;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="NewGameViewModel"/> class.
         /// </summary>
         /// <param name="restService">The rest service.</param>
@@ -72,14 +77,6 @@ namespace Spelling.Mobile.ViewModels
             this.SaveWord = new Command(this.SaveWordCommand);
             this.SkipWord = new Command(this.SkipWordCommand);
         }
-
-        /// <summary>
-        /// Gets or sets the answers.
-        /// </summary>
-        /// <value>
-        /// The answers.
-        /// </value>
-        public IList<AnswerModel> Answers { get; set; }
 
         /// <summary>
         /// Gets or sets the current word.
@@ -123,7 +120,7 @@ namespace Spelling.Mobile.ViewModels
         /// <value>
         /// The summary.
         /// </value>
-        public SummaryModel Summary { get; set; }
+        public SummaryGameModel Summary { get; set; }
 
         /// <summary>
         /// Gets or sets the timer text.
@@ -143,7 +140,11 @@ namespace Spelling.Mobile.ViewModels
         /// <value>
         /// The user answer.
         /// </value>
-        public string UserAnswer { get; set; }
+        public string UserAnswer
+        {
+            get => this.userAnswer;
+            set => this.SetValue(ref this.userAnswer, value);
+        }
 
         /// <summary>
         /// Gets or sets the words.
@@ -170,9 +171,11 @@ namespace Spelling.Mobile.ViewModels
 
             try
             {
+                this.Summary.Time = this.countSecondsTimer;
+
                 await this.restService.Post<GameModel>("http://10.0.2.2:52017/api/v1/games", gameModel, this.workContext.CurrentToken?.Access_Token);
 
-                await Application.Current.MainPage.Navigation.PushAsync(new SummaryGame());
+                await Application.Current.MainPage.Navigation.PushAsync(new SummaryGame(this.Summary));
             }
             catch (XamarinSpellingException)
             {
@@ -190,24 +193,7 @@ namespace Spelling.Mobile.ViewModels
                 return;
             }
 
-            var answer = new AnswerModel
-            {
-                Answer = this.UserAnswer,
-                IsCorrectAnswer = this.UserAnswer.ToLowerInvariant().Equals(this.CurrentWord.English.ToLowerInvariant()),
-                Word = this.CurrentWord
-            };
-
-            this.Answers.Add(answer);
-
-            if (answer.IsCorrectAnswer)
-            {
-                this.Summary.CorrectAnswers++;
-            }
-            else
-            {
-                this.Summary.IncorrectAnswers++;
-            }
-
+            this.AddAnswer();
             this.NextWord();
         }
 
@@ -218,8 +204,7 @@ namespace Spelling.Mobile.ViewModels
         public void SetGroupType(GroupType groupType)
         {
             this.GroupType = groupType;
-            this.Answers = new List<AnswerModel>();
-            this.Summary = new SummaryModel();
+            this.Summary = new SummaryGameModel();
 
             this.LoadWords();
         }
@@ -229,7 +214,32 @@ namespace Spelling.Mobile.ViewModels
         /// </summary>
         public void SkipWordCommand()
         {
+            this.AddAnswer();
             this.NextWord();
+        }
+
+        /// <summary>
+        /// Adds the answer.
+        /// </summary>
+        private void AddAnswer()
+        {
+            var answer = new AnswerModel
+            {
+                Answer = this.UserAnswer,
+                IsCorrectAnswer = !string.IsNullOrEmpty(this.UserAnswer) ? this.UserAnswer.ToLowerInvariant().Equals(this.CurrentWord.English.ToLowerInvariant()) : false,
+                Word = this.CurrentWord
+            };
+
+            this.Summary.Answers.Add(answer);
+
+            if (answer.IsCorrectAnswer)
+            {
+                this.Summary.CorrectAnswers++;
+            }
+            else
+            {
+                this.Summary.IncorrectAnswers++;
+            }
         }
 
         /// <summary>
@@ -243,9 +253,9 @@ namespace Spelling.Mobile.ViewModels
                 {
                     this.countSecondsTimer++;
                     this.TimerText = countSecondsTimer.ToString();
-                }, 
-                null, 
-                0, 
+                },
+                null,
+                0,
                 1000);
         }
 
@@ -284,86 +294,12 @@ namespace Spelling.Mobile.ViewModels
 
                 this.Summary.LeftWords = this.Words.Count - this.currentWordIndex;
                 this.Summary.TotalWords = this.Words.Count;
+                this.UserAnswer = string.Empty;
             }
             else
             {
                 this.timer.Dispose();
                 this.SaveGame();
-            }
-        }
-
-        /// <summary>
-        /// Summary Model
-        /// </summary>
-        /// <seealso cref="Spelling.Mobile.Domain.BaseViewModel" />
-        public class SummaryModel : BaseViewModel
-        {
-            /// <summary>
-            /// The correct answers
-            /// </summary>
-            private int correctAnswers = 0;
-
-            /// <summary>
-            /// The incorrect answers
-            /// </summary>
-            private int incorrectAnswers = 0;
-
-            /// <summary>
-            /// The left words
-            /// </summary>
-            private int leftWords = 0;
-
-            /// <summary>
-            /// The total words
-            /// </summary>
-            private int totalWords = 0;
-
-            /// <summary>
-            /// Gets or sets the correct answers.
-            /// </summary>
-            /// <value>
-            /// The correct answers.
-            /// </value>
-            public int CorrectAnswers
-            {
-                get => this.correctAnswers;
-                set => this.SetValue(ref this.correctAnswers, value);
-            }
-
-            /// <summary>
-            /// Gets or sets the incorrect answers.
-            /// </summary>
-            /// <value>
-            /// The incorrect answers.
-            /// </value>
-            public int IncorrectAnswers
-            {
-                get => this.incorrectAnswers;
-                set => this.SetValue(ref this.incorrectAnswers, value);
-            }
-
-            /// <summary>
-            /// Gets or sets the left words.
-            /// </summary>
-            /// <value>
-            /// The left words.
-            /// </value>
-            public int LeftWords
-            {
-                get => this.leftWords;
-                set => this.SetValue(ref this.leftWords, value);
-            }
-
-            /// <summary>
-            /// Gets or sets the total words.
-            /// </summary>
-            /// <value>
-            /// The total words.
-            /// </value>
-            public int TotalWords
-            {
-                get => this.totalWords;
-                set => this.SetValue(ref this.totalWords, value);
             }
         }
     }

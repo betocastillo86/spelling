@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="Menu.xaml.cs" company="Gabriel Castillo">
+// <copyright file="LoginView.xaml.cs" company="Gabriel Castillo">
 //     Company copyright tag.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -11,18 +11,18 @@ namespace Spelling.Mobile.Views
     using Xamarin.Forms.Xaml;
 
     /// <summary>
-    /// Menu View
+    /// Login View
     /// </summary>
     /// <seealso cref="Xamarin.Forms.ContentPage" />
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Menu : ContentPage
+    public partial class LoginView : ContentPage
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Menu"/> class.
+        /// Initializes a new instance of the <see cref="LoginView"/> class.
         /// </summary>
-        public Menu()
+        public LoginView()
         {
-            this.ViewModel = ServiceRegister.Instance.Resolve<MenuViewModel>();
+            this.ViewModel = ServiceRegister.Instance.Resolve<LoginViewModel>();
 
             this.InitializeComponent();
         }
@@ -33,9 +33,9 @@ namespace Spelling.Mobile.Views
         /// <value>
         /// The view model.
         /// </value>
-        public MenuViewModel ViewModel
+        public LoginViewModel ViewModel
         {
-            get => this.BindingContext as MenuViewModel;
+            get => this.BindingContext as LoginViewModel;
             set => this.BindingContext = value;
         }
     }

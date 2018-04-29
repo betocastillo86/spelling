@@ -100,6 +100,9 @@ namespace Spelling.Mobile.Infraestructure
 
             this.containerBuilder
                 .RegisterType<NewGameViewModel>();
+
+            this.containerBuilder
+                .RegisterType<SummaryGameViewModel>();
         }
     }
 }

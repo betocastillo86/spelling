@@ -76,9 +76,9 @@ namespace Spelling.Mobile.ViewModels
 
                 this.workContext.SetNewToken(token);
 
-                Application.Current.MainPage = new NavigationPage(new Spelling.Mobile.Views.Menu());
+                Application.Current.MainPage = new NavigationPage(new Spelling.Mobile.Views.MenuView());
             }
-            catch (XamarinSpellingException e)
+            catch (XamarinSpellingException)
             {
                 await Application.Current.MainPage.DisplayAlert("Entrar", "Los datos de autenticación son incorrectos", "Cerrar");
             }

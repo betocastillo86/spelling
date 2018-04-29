@@ -33,5 +33,16 @@ namespace Spelling.Mobile.Domain
         ///   <c>true</c> if this instance is correct answer; otherwise, <c>false</c>.
         /// </value>
         public bool IsCorrectAnswer { get; set; }
+
+        /// <summary>
+        /// Gets the answer comparison.
+        /// </summary>
+        /// <value>
+        /// The answer comparison.
+        /// </value>
+        public string AnswerComparison
+        {
+            get => $"{this.Answer} => {this.Word?.English}";
+        }
     }
 }

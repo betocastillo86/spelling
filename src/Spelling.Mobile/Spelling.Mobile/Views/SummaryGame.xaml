@@ -1,8 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Spelling.Mobile.Views.SummaryGame">
+             x:Class="Spelling.Mobile.Views.SummaryGame"
+             NavigationPage.HasBackButton="False"
+             Title="Resumen de jugada">
     <StackLayout>
-        <Label Text="todo ok"></Label>
+        <Label Text="{Binding Model.Time, StringFormat='Tiempo son {0} segundos'}"></Label>
+        <Label Text="{Binding Model.CorrectAnswers, StringFormat='{0} respuestas correctas'}" TextColor="Green"></Label>
+        <Label Text="{Binding Model.IncorrectAnswers, StringFormat='{0} respuestas incorrectas'}" TextColor="Red"></Label>
+        <Label Text="Errores" FontSize="Large"></Label>
+        <ListView
+            ItemsSource="{Binding IncorrectAnswers}"
+            >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Word.Spanish}" Detail="{Binding AnswerComparison}"></TextCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Text="Terminar" Command="{Binding Finish}"></Button>
     </StackLayout>
 </ContentPage>
