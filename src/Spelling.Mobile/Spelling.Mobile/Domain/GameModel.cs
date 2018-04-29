@@ -1,18 +1,17 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="Game.cs" company="Gabriel Castillo">
+// <copyright file="GameModel.cs" company="Gabriel Castillo">
 //     Company copyright tag.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace Spelling.Domain
+namespace Spelling.Mobile.Domain
 {
     using System;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using Beto.Core.Data;
+    using Spelling.Mobile.Domain.Enums;
 
     /// <summary>
-    /// The game class
+    /// Game Model
     /// </summary>
-    public class Game : IEntity
+    public class GameModel
     {
         /// <summary>
         /// Gets or sets the identifier.
@@ -23,20 +22,12 @@ namespace Spelling.Domain
         public int Id { get; set; }
 
         /// <summary>
-        /// Gets or sets the group identifier.
+        /// Gets or sets the type of the group.
         /// </summary>
         /// <value>
-        /// The group identifier.
+        /// The type of the group.
         /// </value>
-        public short GroupId { get; set; }
-
-        /// <summary>
-        /// Gets or sets the user identifier.
-        /// </summary>
-        /// <value>
-        /// The user identifier.
-        /// </value>
-        public int UserId { get; set; }
+        public GroupType? GroupType { get; set; }
 
         /// <summary>
         /// Gets or sets the creation date.
@@ -85,53 +76,5 @@ namespace Spelling.Domain
         /// The origin language.
         /// </value>
         public string OriginLanguage { get; set; }
-
-        /// <summary>
-        /// Gets or sets the user.
-        /// </summary>
-        /// <value>
-        /// The user.
-        /// </value>
-        public virtual User User { get; set; }
-
-        /// <summary>
-        /// Gets or sets the type of the group.
-        /// </summary>
-        /// <value>
-        /// The type of the group.
-        /// </value>
-        [NotMapped]
-        public virtual GroupType GroupType
-        {
-            get
-            {
-                return (GroupType)this.GroupId;
-            }
-
-            set
-            {
-                this.GroupId = Convert.ToInt16(value);
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the language.
-        /// </summary>
-        /// <value>
-        /// The language.
-        /// </value>
-        [NotMapped]
-        public virtual Language Language
-        {
-            get
-            {
-                return (Language)Enum.Parse(typeof(Language), this.OriginLanguage);
-            }
-
-            set
-            {
-                this.OriginLanguage = value.ToString();
-            }
-        }
     }
 }

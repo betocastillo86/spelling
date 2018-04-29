@@ -11,16 +11,14 @@
   <ItemGroup>
     <PackageReference Include="AspNet.Security.OAuth.Validation" Version="2.0.0-rc1-final" />
     <PackageReference Include="AspNet.Security.OpenIdConnect.Server" Version="2.0.0-rc1-final" />
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="7.5.2" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.7" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ext\beto.core\src\Beto.Core.Data\Beto.Core.Data.csproj" />
     <ProjectReference Include="..\..\ext\beto.core\src\Beto.Core.Web\Beto.Core.Web.csproj" />
-    <ProjectReference Include="..\..\ext\beto.core\src\Beto.Core\Beto.Core.csproj" />
     <ProjectReference Include="..\Spelling.Business\Spelling.Business.csproj" />
     <ProjectReference Include="..\Spelling.Data\Spelling.Data.csproj" />
-    <ProjectReference Include="..\Spelling.Domain\Spelling.Domain.csproj" />
     <ProjectReference Include="..\Spelling.Models\Spelling.Models.csproj" />
   </ItemGroup>
 

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Spelling.Mobile.Views.Menu">
+    <StackLayout>
+        <Button Text="Questions" Command="{Binding ChooseMenu}" CommandParameter="Questions"></Button>
+        <Button Text="AdverbsOfFrecuency" Command="{Binding ChooseMenu}" CommandParameter="AdverbsOfFrecuency"></Button>
+        <Button Text="Adjectives" Command="{Binding ChooseMenu}" CommandParameter="Adjectives"></Button>
+        <Button Text="Clothes" Command="{Binding ChooseMenu}" CommandParameter="Clothes"></Button>
+        <Button Text="Body" Command="{Binding ChooseMenu}" CommandParameter="Body"></Button>
+        <Button Text="RegularVerbs" Command="{Binding ChooseMenu}" CommandParameter="RegularVerbs"></Button>
+        <Button Text="IregularVerbs" Command="{Binding ChooseMenu}" CommandParameter="IregularVerbs"></Button>
+        <Button Text="PhrasalVerbs" Command="{Binding ChooseMenu}" CommandParameter="PhrasalVerbs"></Button>
+        <Button Text="House" Command="{Binding ChooseMenu}" CommandParameter="House"></Button>
+    </StackLayout>
+</ContentPage>

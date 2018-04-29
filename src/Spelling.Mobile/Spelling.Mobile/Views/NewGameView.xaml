@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Spelling.Mobile.Views.NewGameView">
+    <StackLayout>
+
+        <Label Text="{Binding Summary.LeftWords, StringFormat='Faltan {0} palabras'}"></Label>
+        <Label Text="{Binding Summary.CorrectAnswers, StringFormat='Tienes {0} aciertos'}" TextColor="Green"></Label>
+        <Label Text="{Binding Summary.IncorrectAnswers, StringFormat='Tienes {0} errores'}" TextColor="Red"></Label>
+        <Label Text="{Binding TimerText}"></Label>
+        <Label Text="{Binding CurrentWord.Spanish}"></Label>
+        <Entry Text="{Binding UserAnswer}">
+            <Entry.Keyboard>
+                <Keyboard x:FactoryMethod="Create">
+                    <x:Arguments>
+                        <KeyboardFlags>None</KeyboardFlags>
+                    </x:Arguments>
+                </Keyboard>
+            </Entry.Keyboard>
+        </Entry>
+
+        <Button Text="Siguiente" BackgroundColor="Green" Command="{Binding SaveWord}"></Button>
+        <Button Text="Saltar" Command="{Binding SkipWord}"></Button>
+        <Button Text="Pausar"></Button>
+        <Button Text="Salir" BackgroundColor="Red"></Button>
+    </StackLayout>
+</ContentPage>

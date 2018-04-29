@@ -10,9 +10,11 @@ namespace Spelling.Web.Infraestructure
     using Beto.Core.Data.Configuration;
     using Beto.Core.Exceptions;
     using Beto.Core.Helpers;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.DependencyInjection.Extensions;
     using Spelling.Business.Configuration;
     using Spelling.Business.Exceptions;
     using Spelling.Business.Security;
@@ -62,6 +64,10 @@ namespace Spelling.Web.Infraestructure
             services.AddScoped<ICacheManager, MemoryCacheManager>();
 
             services.AddScoped<ICoreSettingService, CoreSettingService>();
+
+            //// .Net
+
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
     }
 }

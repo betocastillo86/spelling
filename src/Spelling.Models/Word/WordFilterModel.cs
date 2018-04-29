@@ -45,7 +45,7 @@ namespace Spelling.Models
         {
             get
             {
-                return string.IsNullOrEmpty(this.OrderBy) ? OrderByWord.Spanish : Enum.Parse<OrderByWord>(this.OrderBy);
+                return string.IsNullOrEmpty(this.OrderBy) ? OrderByWord.Spanish : (OrderByWord)Enum.Parse(typeof(OrderByWord), this.OrderBy);
             }
         }
     }

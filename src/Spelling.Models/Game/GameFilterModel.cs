@@ -52,7 +52,7 @@ namespace Spelling.Models
         {
             get
             {
-                return string.IsNullOrEmpty(this.OrderBy) ? OrderByGame.Newest : Enum.Parse<OrderByGame>(this.OrderBy);
+                return string.IsNullOrEmpty(this.OrderBy) ? OrderByGame.Newest : (OrderByGame)Enum.Parse(typeof(OrderByGame), this.OrderBy);
             }
         }
     }
