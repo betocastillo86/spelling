@@ -65,6 +65,29 @@ namespace Spelling.Mobile.Sevices
         }
 
         /// <summary>
+        /// Gets the specified URL.
+        /// </summary>
+        /// <typeparam name="TResponse">The type of the response.</typeparam>
+        /// <param name="url">The URL.</param>
+        /// <param name="authToken">The authentication token.</param>
+        /// <returns>
+        /// the response
+        /// </returns>
+        public async Task<TResponse> Get<TResponse>(string url, string authToken = null) where TResponse : class
+        {
+            using (var client = new HttpClient())
+            {
+                if (authToken != null)
+                {
+                    client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", authToken);
+                }
+
+                var response = await client.GetAsync(url);
+                return await this.HandleResponse<TResponse>(response);
+            }
+        }
+
+        /// <summary>
         /// Posts the specified URL.
         /// </summary>
         /// <typeparam name="TRequest">The type of the request.</typeparam>

@@ -6,6 +6,31 @@
     <StackLayout>
         <Label Text="{Binding GroupType}"></Label>
 
+        <StackLayout IsVisible="{Binding CanShowBestScore}">
+            <Label Text="Mejor puntaje" TextColor="Red" FontSize="Large"></Label>
+            <Label Text="{Binding BestScore.Points, StringFormat='Puntos {0}'}"></Label>
+            <Label Text="{Binding BestScore.Time, StringFormat='Tiempo {0}'}"></Label>
+            <Label Text="{Binding BestScore.GameCreationDate, StringFormat='Fecha de juego {0}'}"></Label>
+        </StackLayout>
+
+        <Label Text="Ultimos 10 juegos" FontSize="Large"></Label>
+        <ListView ItemsSource="{Binding LatestGames}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding Positives, StringFormat='Puntos: {0}'}"></Label>
+                            <Label Text="{Binding Time, StringFormat='Tiempo: {0}'}"></Label>
+                            <Label Text="{Binding CreationDate, StringFormat='Fecha: {0}'}"></Label>
+                        </StackLayout>
+                    </ViewCell>
+                    
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
+        
+        
         <Button Text="Empezar" Command="{Binding BeginGame}"></Button>
     </StackLayout>
 </ContentPage>

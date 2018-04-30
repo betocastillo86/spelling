@@ -16,6 +16,15 @@ namespace Spelling.Mobile.Sevices
         /// <summary>
         /// Gets the specified URL.
         /// </summary>
+        /// <typeparam name="TResponse">The type of the response.</typeparam>
+        /// <param name="url">The URL.</param>
+        /// <param name="authToken">The authentication token.</param>
+        /// <returns>the response</returns>
+        Task<TResponse> Get<TResponse>(string url, string authToken = null) where TResponse : class;
+
+        /// <summary>
+        /// Gets the specified URL.
+        /// </summary>
         /// <typeparam name="TRequest">The type of the request.</typeparam>
         /// <typeparam name="TResponse">The type of the response.</typeparam>
         /// <param name="url">The URL.</param>

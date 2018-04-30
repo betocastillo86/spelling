@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------
 namespace Spelling.Mobile.Infraestructure
 {
+    using Spelling.Mobile.Domain;
     using Spelling.Mobile.Models;
 
     /// <summary>
@@ -21,6 +22,14 @@ namespace Spelling.Mobile.Infraestructure
         TokenModel CurrentToken { get; }
 
         /// <summary>
+        /// Gets the current token.
+        /// </summary>
+        /// <value>
+        /// The current token.
+        /// </value>
+        UserModel CurrentUser { get; }
+
+        /// <summary>
         /// Gets a value indicating whether this instance is authenticated.
         /// </summary>
         /// <value>
@@ -32,6 +41,7 @@ namespace Spelling.Mobile.Infraestructure
         /// Sets the new token.
         /// </summary>
         /// <param name="tokenModel">The token model.</param>
-        void SetNewToken(TokenModel tokenModel);
+        /// <param name="currentUser">The current user.</param>
+        void SetNewToken(TokenModel tokenModel, UserModel currentUser);
     }
 }

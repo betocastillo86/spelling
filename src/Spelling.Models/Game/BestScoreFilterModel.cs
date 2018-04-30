@@ -1,31 +1,21 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="GameFilterModel.cs" company="Gabriel Castillo">
+// <copyright file="BestScoreFilterModel.cs" company="Gabriel Castillo">
 //     Company copyright tag.
 // </copyright>
 //-----------------------------------------------------------------------
 namespace Spelling.Models
 {
-    using System;
     using Beto.Core.Web.Api;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Spelling.Domain;
 
     /// <summary>
-    /// Game Filter Model
+    /// Best Score Filter Model
     /// </summary>
     /// <seealso cref="Beto.Core.Web.Api.BaseFilterModel" />
-    public class GameFilterModel : BaseFilterModel
+    public class BestScoreFilterModel : BaseFilterModel
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GameFilterModel"/> class.
-        /// </summary>
-        public GameFilterModel()
-        {
-            this.MaxPageSize = 50;
-            this.ValidOrdersBy = Enum.GetNames(typeof(OrderByGame));
-        }
-
         /// <summary>
         /// Gets or sets the user identifier.
         /// </summary>
@@ -42,19 +32,5 @@ namespace Spelling.Models
         /// </value>
         [JsonConverter(typeof(StringEnumConverter))]
         public GroupType? GroupType { get; set; }
-
-        /// <summary>
-        /// Gets the order by enum.
-        /// </summary>
-        /// <value>
-        /// The order by enum.
-        /// </value>
-        public OrderByGame OrderByEnum
-        {
-            get
-            {
-                return string.IsNullOrEmpty(this.OrderBy) ? OrderByGame.Newest : (OrderByGame)Enum.Parse(typeof(OrderByGame), this.OrderBy);
-            }
-        }
     }
 }

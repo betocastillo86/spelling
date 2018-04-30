@@ -58,7 +58,7 @@ namespace Spelling.Business.Services
         /// <param name="page">The page.</param>
         /// <param name="pageSize">Size of the page.</param>
         /// <returns>the scores</returns>
-        IPagedList<BestScore> GetBestScores(
+        Task<IPagedList<BestScore>> GetBestScoresAsync(
             int? userId = null,
             GroupType? groupType = null,
             int page = 0,

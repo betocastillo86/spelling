@@ -9,6 +9,7 @@ namespace Spelling.Business.Services
     using System.Linq;
     using System.Threading.Tasks;
     using Beto.Core.Data;
+    using Microsoft.EntityFrameworkCore;
     using Spelling.Domain;
 
     /// <summary>
@@ -83,7 +84,7 @@ namespace Spelling.Business.Services
             int page = 0,
             int pageSize = int.MaxValue)
         {
-            return await new PagedList<Game>().Async(this.GetAllQuery(userId, groupType, originLanguage), page, pageSize);
+            return await new PagedList<Game>().Async(this.GetAllQuery(userId, groupType, originLanguage, orderBy), page, pageSize);
         }
 
         /// <summary>
@@ -96,21 +97,23 @@ namespace Spelling.Business.Services
         /// <returns>
         /// the scores
         /// </returns>
-        public IPagedList<BestScore> GetBestScores(int? userId = null, GroupType? groupType = null, int page = 0, int pageSize = int.MaxValue)
+        public async Task<IPagedList<BestScore>> GetBestScoresAsync(int? userId = null, GroupType? groupType = null, int page = 0, int pageSize = int.MaxValue)
         {
-            var query = this.bestScoreRepository.TableNoTracking;
+            var query = this.bestScoreRepository.TableNoTracking
+                .Include(c => c.User)
+                .AsQueryable();
 
-            if (!userId.HasValue)
+            if (userId.HasValue)
             {
                 query = query.Where(c => c.UserId == userId);
             }
 
-            if (!groupType.HasValue)
+            if (groupType.HasValue)
             {
                 query = query.Where(c => c.GroupId == Convert.ToInt16(groupType));
             }
 
-            return new PagedList<BestScore>(query, page, pageSize);
+            return await new PagedList<BestScore>().Async(query, page, pageSize);
         }
 
         /// <summary>

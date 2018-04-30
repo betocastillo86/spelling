@@ -63,6 +63,14 @@ namespace Spelling.Domain
         public DateTime GameCreationDate { get; set; }
 
         /// <summary>
+        /// Gets or sets the user.
+        /// </summary>
+        /// <value>
+        /// The user.
+        /// </value>
+        public virtual User User { get; set; }
+
+        /// <summary>
         /// Gets or sets the type of the group.
         /// </summary>
         /// <value>

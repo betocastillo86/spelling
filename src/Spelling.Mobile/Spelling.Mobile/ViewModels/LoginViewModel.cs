@@ -7,6 +7,7 @@ namespace Spelling.Mobile.ViewModels
 {
     using System.Collections.Generic;
     using System.Windows.Input;
+    using Spelling.Mobile.Domain;
     using Spelling.Mobile.Exceptions;
     using Spelling.Mobile.Infraestructure;
     using Spelling.Mobile.Models;
@@ -74,7 +75,25 @@ namespace Spelling.Mobile.ViewModels
 
                 var token = await this.restService.PostUrlEncoded<TokenModel>("http://10.0.2.2:52017/api/v1/auth", parameters);
 
-                this.workContext.SetNewToken(token);
+                this.GetCurretUser(token);
+            }
+            catch (XamarinSpellingException)
+            {
+                await Application.Current.MainPage.DisplayAlert("Entrar", "Los datos de autenticación son incorrectos", "Cerrar");
+            }
+        }
+
+        /// <summary>
+        /// Gets the curret user.
+        /// </summary>
+        /// <param name="token">The token.</param>
+        private async void GetCurretUser(TokenModel token)
+        {
+            try
+            {
+                var user = await this.restService.Get<UserModel>("http://10.0.2.2:52017/api/v1/auth/current", authToken: token.Access_Token);
+
+                this.workContext.SetNewToken(token, user);
 
                 Application.Current.MainPage = new NavigationPage(new Spelling.Mobile.Views.MenuView());
             }
