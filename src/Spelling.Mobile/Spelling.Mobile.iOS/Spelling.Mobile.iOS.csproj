@@ -95,21 +95,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Default-568h%402x.png" />
-    <BundleResource Include="Resources\Default-Portrait.png" />
-    <BundleResource Include="Resources\Default-Portrait%402x.png" />
-    <BundleResource Include="Resources\Default.png" />
-    <BundleResource Include="Resources\Default%402x.png" />
-    <BundleResource Include="Resources\Icon-60%402x.png" />
-    <BundleResource Include="Resources\Icon-60%403x.png" />
-    <BundleResource Include="Resources\Icon-76.png" />
-    <BundleResource Include="Resources\Icon-76%402x.png" />
-    <BundleResource Include="Resources\Icon-Small-40.png" />
-    <BundleResource Include="Resources\Icon-Small-40%402x.png" />
-    <BundleResource Include="Resources\Icon-Small-40%403x.png" />
-    <BundleResource Include="Resources\Icon-Small.png" />
-    <BundleResource Include="Resources\Icon-Small%402x.png" />
-    <BundleResource Include="Resources\Icon-Small%403x.png" />
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
   </ItemGroup>
   <ItemGroup>
@@ -127,5 +112,68 @@
       <Project>{B0043FD0-0E79-4020-A66B-2EEAFB6BD5F0}</Project>
       <Name>Spelling.Mobile</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\questions.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\questions%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\questions%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\adjectives.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\body.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\clothes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\house.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\irregular.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\phrasal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\regular.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\time.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pointgreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pointred.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pointyellow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pointblue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\play.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\cup.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\date.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\time2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\good.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\bad.png" />
   </ItemGroup>
 </Project>

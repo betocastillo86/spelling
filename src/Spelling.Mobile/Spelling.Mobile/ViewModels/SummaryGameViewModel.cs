@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------
 namespace Spelling.Mobile.ViewModels
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Windows.Input;
@@ -22,6 +23,11 @@ namespace Spelling.Mobile.ViewModels
         /// The model
         /// </summary>
         private SummaryGameModel model;
+
+        /// <summary>
+        /// The timer text
+        /// </summary>
+        private string timerText = null;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SummaryGameViewModel"/> class.
@@ -56,6 +62,18 @@ namespace Spelling.Mobile.ViewModels
         public SummaryGameModel Model { get => this.model; private set => this.SetValue(ref this.model, value); }
 
         /// <summary>
+        /// Gets or sets the timer text.
+        /// </summary>
+        /// <value>
+        /// The timer text.
+        /// </value>
+        public string TimerText
+        {
+            get => this.timerText;
+            set => this.SetValue(ref this.timerText, value);
+        }
+
+        /// <summary>
         /// Finishes the command.
         /// </summary>
         public async void FinishCommand()
@@ -71,6 +89,7 @@ namespace Spelling.Mobile.ViewModels
         {
             this.Model = model;
             this.IncorrectAnswers = model.Answers.Where(c => !c.IsCorrectAnswer).ToList();
+            this.TimerText = TimeSpan.FromSeconds(this.Model.Time).ToString(@"hh\:mm\:ss");
         }
     }
 }

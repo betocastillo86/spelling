@@ -2,35 +2,168 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Spelling.Mobile.Views.GroupDetailView"
-             Title="{Binding GroupType, StringFormat='Historico {0}'}">
-    <StackLayout>
-        <Label Text="{Binding GroupType}"></Label>
+             Title="{Binding GroupType, StringFormat='Historico {0}'}"
+             Style="{StaticResource contentpage_default}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="label_titleGroupDetail" TargetType="Label">
+                <Setter Property="TextColor" Value="White"></Setter>
+                <Setter Property="FontSize" Value="Large"></Setter>
+                <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+            </Style>
+            <Style x:Key="label_bestScoreTitle" TargetType="Label">
+                <Setter Property="TextColor" Value="White"></Setter>
+                <Setter Property="FontSize" Value="Small"></Setter>
+                <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+                <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
+            </Style>
+            <Style x:Key="label_bestScoreNumber" TargetType="Label">
+                <Setter Property="TextColor" Value="White"></Setter>
+                <Setter Property="FontSize" Value="Medium"></Setter>
+                <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+                <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
+                <Setter Property="FontAttributes" Value="Bold"></Setter>
+            </Style>
+            <Style x:Key="button_play" TargetType="Button">
+                <Setter Property="BorderRadius" Value="50"></Setter>
+                <Setter Property="BackgroundColor" Value="#1DB954"></Setter>
+                <Setter Property="TextColor" Value="White"></Setter>
+                <Setter Property="BorderColor" Value="Black"></Setter>
+                <Setter Property="BorderWidth" Value="3"></Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <RelativeLayout>
+        <StackLayout
+            x:Name="bestScore"
+            RelativeLayout.YConstraint="{ConstraintExpression
+                    Type=RelativeToParent,
+                    Property=Height,
+                    Factor = 0,
+                    Constant=0 }"
 
-        <StackLayout IsVisible="{Binding CanShowBestScore}">
-            <Label Text="Mejor puntaje" TextColor="Red" FontSize="Large"></Label>
-            <Label Text="{Binding BestScore.Points, StringFormat='Puntos {0}'}"></Label>
-            <Label Text="{Binding BestScore.Time, StringFormat='Tiempo {0}'}"></Label>
-            <Label Text="{Binding BestScore.GameCreationDate, StringFormat='Fecha de juego {0}'}"></Label>
+            RelativeLayout.WidthConstraint="{ConstraintExpression
+                    Type=RelativeToParent,
+                    Property=Width,
+                    Factor=1 }"
+
+            HorizontalOptions="FillAndExpand"
+            BackgroundColor="#1db954">
+            <StackLayout Orientation="Vertical" Margin="5,5,5,40">
+                <Grid>
+                    <Image Source="cup.png"  HorizontalOptions="Center" Grid.Row="0" Grid.Column="0" WidthRequest="50" HeightRequest="10"></Image>
+                    <Image Source="time2.png"    HorizontalOptions="Center" Grid.Row="0" Grid.Column="1" WidthRequest="50" HeightRequest="10"></Image>
+                    <Image Source="date.png" HorizontalOptions="Center" Grid.Row="0" Grid.Column="2" WidthRequest="50" HeightRequest="10"></Image>
+                    <Label Text="{Binding BestScore.Points}"  Style="{StaticResource label_bestScoreNumber}"                                         Grid.Row="1" Grid.Column="0"           ></Label>
+                    <Label Text="{Binding BestScore.Time, StringFormat='{0}s.'}" Style="{StaticResource label_bestScoreNumber}"                      Grid.Row="1" Grid.Column="1"              ></Label>
+                    <Label Text="{Binding BestScore.GameCreationDate, StringFormat='{0:yyyy/MM/dd}'}" Style="{StaticResource label_bestScoreNumber}" Grid.Row="1" Grid.Column="2"  ></Label>
+                    <Label Text="Puntos" Style="{StaticResource label_bestScoreTitle}" Grid.Row="2" Grid.Column="0"></Label>
+                    <Label Text="Tiempo" Style="{StaticResource label_bestScoreTitle}" Grid.Row="2" Grid.Column="1" ></Label>
+                    <Label Text="Fecha"  Style="{StaticResource label_bestScoreTitle}" Grid.Row="2" Grid.Column="2" ></Label>
+                </Grid>
+            </StackLayout>
+        </StackLayout>
+        <Button Image="play.png"
+                Command="{Binding BeginGame}"
+                Text="Jugar"
+                Style="{StaticResource button_play}"
+                
+                RelativeLayout.YConstraint="{ConstraintExpression
+                    Type=RelativeToView,
+                    Property=Height,
+                    ElementName=bestScore,
+                    Factor=1,
+                    Constant=-20 }"
+                
+                RelativeLayout.XConstraint="{ConstraintExpression
+                    Type=RelativeToParent,
+                    Property=Width,
+                    Factor=0.7 }"
+                
+                ></Button>
+
+        <StackLayout
+            RelativeLayout.YConstraint="{ConstraintExpression
+                Type=RelativeToView,
+                Property=Height,
+                ElementName=bestScore,
+                Factor=1,
+                Constant=20}"
+            
+            RelativeLayout.WidthConstraint="{ConstraintExpression
+                Type=RelativeToParent,
+                Property=Width,
+                Factor=1}"
+            
+            Margin="10,5,10,5"
+            >
+
+            <Label Text="Ultimos 10 juegos" FontSize="Large" HorizontalOptions="Center" FontAttributes="Bold" Style="{StaticResource label_default}" ></Label>
+            <ListView 
+                ItemsSource="{Binding LatestGames}" 
+                HorizontalOptions="StartAndExpand" 
+                HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout
+                                Orientation="Vertical" 
+                                >
+
+                                <Label Text="{Binding CreationDate, StringFormat='Fecha: {0}'}" Style="{StaticResource label_default}" HorizontalOptions="Start"></Label>
+
+                                <Grid>
+                                    <Image 
+                                        
+                                        Grid.Column="0"
+                                        Grid.Row="0"
+                                        Grid.RowSpan="2"
+                                        
+                                        Source="time.png" 
+                                        WidthRequest="30" 
+                                        HeightRequest="30" 
+                                        HorizontalOptions="Center"    ></Image>
+
+                                    <Label Grid.Column="1" Grid.Row="0" HorizontalOptions="Center" Text="{Binding Positives}" Style="{StaticResource label_default}" FontSize="Large" FontAttributes="Bold" ></Label>
+                                    <Label Grid.Column="1" Grid.Row="1" HorizontalOptions="Center" Text="Puntos" Style="{StaticResource label_default}"></Label>
+                                    <Label Grid.Column="2" Grid.Row="0" HorizontalOptions="Center" Text="{Binding Time}" Style="{StaticResource label_default}" FontSize="Large" FontAttributes="Bold" ></Label>
+                                    <Label Grid.Column="2" Grid.Row="1" HorizontalOptions="Center" Text="Duración(seg)" Style="{StaticResource label_default}"></Label>
+
+                                </Grid>
+                                
+                                
+                                <!--<StackLayout 
+                                    Orientation="Horizontal" 
+                                    HorizontalOptions="FillAndExpand" 
+                                    BackgroundColor="Red">
+                                    <StackLayout HorizontalOptions="StartAndExpand" BackgroundColor="Blue" VerticalOptions="Fill" >
+                                        <Image 
+                                        Source="time.png" 
+                                        WidthRequest="30" 
+                                        HeightRequest="30" 
+                                        BackgroundColor="Yellow"
+                                        HorizontalOptions="Center"    ></Image>
+                                    </StackLayout>
+                                    <StackLayout 
+                                        Orientation="Vertical" 
+                                        BackgroundColor="Yellow"
+                                        HorizontalOptions="CenterAndExpand">
+                                        <Label HorizontalOptions="Center" Text="{Binding Positives}" Style="{StaticResource label_default}" FontSize="Large" FontAttributes="Bold" ></Label>
+                                        <Label HorizontalOptions="Center" Text="Puntos" Style="{StaticResource label_default}"></Label>
+                                    </StackLayout>
+                                    <StackLayout 
+                                        Orientation="Vertical"
+                                        HorizontalOptions="EndAndExpand">
+                                        <Label HorizontalOptions="Center" Text="{Binding Time}" Style="{StaticResource label_default}" FontSize="Large" FontAttributes="Bold" ></Label>
+                                        <Label HorizontalOptions="Center" Text="Duración(seg)" Style="{StaticResource label_default}"></Label>
+                                    </StackLayout>
+                                </StackLayout>-->
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
 
-        <Label Text="Ultimos 10 juegos" FontSize="Large"></Label>
-        <ListView ItemsSource="{Binding LatestGames}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="{Binding Positives, StringFormat='Puntos: {0}'}"></Label>
-                            <Label Text="{Binding Time, StringFormat='Tiempo: {0}'}"></Label>
-                            <Label Text="{Binding CreationDate, StringFormat='Fecha: {0}'}"></Label>
-                        </StackLayout>
-                    </ViewCell>
-                    
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        
-        
-        
-        <Button Text="Empezar" Command="{Binding BeginGame}"></Button>
-    </StackLayout>
+    </RelativeLayout>
 </ContentPage>

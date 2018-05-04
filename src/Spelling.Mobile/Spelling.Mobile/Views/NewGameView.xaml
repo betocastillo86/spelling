@@ -2,15 +2,14 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Spelling.Mobile.Views.NewGameView"
-             Title="{Binding GroupType, StringFormat='Juego con {0}'}">
-    <StackLayout>
+             Title="{Binding GroupType, StringFormat='Juego con {0}'}"
+             Style="{StaticResource contentpage_default}">
 
-        <Label Text="{Binding Summary.LeftWords, StringFormat='Faltan {0} palabras'}"></Label>
-        <Label Text="{Binding Summary.CorrectAnswers, StringFormat='Tienes {0} aciertos'}" TextColor="Green"></Label>
-        <Label Text="{Binding Summary.IncorrectAnswers, StringFormat='Tienes {0} errores'}" TextColor="Red"></Label>
-        <Label Text="{Binding TimerText}"></Label>
-        <Label Text="{Binding CurrentWord.Spanish}"></Label>
-        <Entry Text="{Binding UserAnswer}">
+    <StackLayout Margin="5">
+
+        <Label Text="{Binding CurrentWord.Spanish}" Style="{StaticResource label_currentWord}"></Label>
+
+        <Entry Text="{Binding UserAnswer}" Style="{StaticResource entry_currentWord}">
             <Entry.Keyboard>
                 <Keyboard x:FactoryMethod="Create">
                     <x:Arguments>
@@ -19,10 +18,24 @@
                 </Keyboard>
             </Entry.Keyboard>
         </Entry>
+        <Label Text="{Binding LeftWordsText}" Style="{StaticResource label_default}" HorizontalTextAlignment="Center"></Label>
 
-        <Button Text="Siguiente" BackgroundColor="Green" Command="{Binding SaveWord}"></Button>
-        <Button Text="Saltar" Command="{Binding SkipWord}"></Button>
-        <Button Text="Pausar"></Button>
-        <Button Text="Salir" BackgroundColor="Red"></Button>
+        <Button Text="Siguiente" Style="{StaticResource button_newGameOptions}" TextColor="White" BackgroundColor="Green" Command="{Binding SaveWord}"></Button>
+
+        <Label Text="{Binding TimerText}" Style="{StaticResource label_time}" ></Label>
+        <StackLayout>
+            <Grid>
+                <Image Grid.Column="0" Grid.Row="0" Source="good.png" WidthRequest="25" HeightRequest="30"></Image>
+                <Label Grid.Column="0" Grid.Row="1" Style="{StaticResource label_counter}" Text="{Binding Summary.CorrectAnswers}" TextColor="Green"></Label>
+                <Image Grid.Column="1" Grid.Row="0" Source="bad.png" WidthRequest="25" HeightRequest="30"></Image>
+                <Label Grid.Column="1" Grid.Row="1" Style="{StaticResource label_counter}" Text="{Binding Summary.IncorrectAnswers}" TextColor="Red"></Label>
+            </Grid>
+        </StackLayout>
+
+        
+
+        <Button Text="Saltar" Style="{StaticResource button_newGameOptions}" Command="{Binding SkipWord}"></Button>
+        <!--<Button Text="Pausar" Style="{StaticResource button_newGameOptions}"></Button>-->
+        <Button Text="Salir" Style="{StaticResource button_newGameOptions}" Command="{Binding Exit}" TextColor="White" BackgroundColor="Red"></Button>
     </StackLayout>
 </ContentPage>

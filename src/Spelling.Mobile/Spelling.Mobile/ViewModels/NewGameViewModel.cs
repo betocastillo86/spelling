@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------
 namespace Spelling.Mobile.ViewModels
 {
+    using System;
     using System.Collections.Generic;
     using System.Threading;
     using System.Windows.Input;
@@ -48,6 +49,11 @@ namespace Spelling.Mobile.ViewModels
         private int currentWordIndex = 0;
 
         /// <summary>
+        /// The left words text
+        /// </summary>
+        private string leftWordsText = null;
+
+        /// <summary>
         /// The timer
         /// </summary>
         private Timer timer;
@@ -76,6 +82,7 @@ namespace Spelling.Mobile.ViewModels
 
             this.SaveWord = new Command(this.SaveWordCommand);
             this.SkipWord = new Command(this.SkipWordCommand);
+            this.Exit = new Command(this.ExitCommand);
         }
 
         /// <summary>
@@ -91,12 +98,32 @@ namespace Spelling.Mobile.ViewModels
         }
 
         /// <summary>
+        /// Gets the exit.
+        /// </summary>
+        /// <value>
+        /// The exit.
+        /// </value>
+        public ICommand Exit { get; private set; }
+
+        /// <summary>
         /// Gets the type of the group.
         /// </summary>
         /// <value>
         /// The type of the group.
         /// </value>
         public GroupType GroupType { get; private set; }
+
+        /// <summary>
+        /// Gets or sets the left words text.
+        /// </summary>
+        /// <value>
+        /// The left words text.
+        /// </value>
+        public string LeftWordsText
+        {
+            get => this.leftWordsText;
+            set => this.SetValue(ref this.leftWordsText, value);
+        }
 
         /// <summary>
         /// Gets the save word.
@@ -155,6 +182,14 @@ namespace Spelling.Mobile.ViewModels
         public IList<WordModel> Words { get; set; }
 
         /// <summary>
+        /// Exits the command.
+        /// </summary>
+        public async void ExitCommand()
+        {
+            await Application.Current.MainPage.Navigation.PopAsync();
+        }
+
+        /// <summary>
         /// Saves the game.
         /// </summary>
         public async void SaveGame()
@@ -210,15 +245,6 @@ namespace Spelling.Mobile.ViewModels
         }
 
         /// <summary>
-        /// Skips the word command.
-        /// </summary>
-        public void SkipWordCommand()
-        {
-            this.AddAnswer();
-            this.NextWord();
-        }
-
-        /// <summary>
         /// Adds the answer.
         /// </summary>
         private void AddAnswer()
@@ -252,7 +278,7 @@ namespace Spelling.Mobile.ViewModels
                 (del) =>
                 {
                     this.countSecondsTimer++;
-                    this.TimerText = countSecondsTimer.ToString();
+                    this.TimerText = TimeSpan.FromSeconds(countSecondsTimer).ToString(@"hh\:mm\:ss");
                 },
                 null,
                 0,
@@ -292,8 +318,9 @@ namespace Spelling.Mobile.ViewModels
                 this.CurrentWord = this.Words[this.currentWordIndex];
                 this.currentWordIndex++;
 
-                this.Summary.LeftWords = this.Words.Count - this.currentWordIndex;
+                this.Summary.LeftWords = this.currentWordIndex;
                 this.Summary.TotalWords = this.Words.Count;
+                this.LeftWordsText = $"{this.Summary.LeftWords}/{this.Summary.TotalWords}";
                 this.UserAnswer = string.Empty;
             }
             else
@@ -301,6 +328,15 @@ namespace Spelling.Mobile.ViewModels
                 this.timer.Dispose();
                 this.SaveGame();
             }
+        }
+
+        /// <summary>
+        /// Skips the word command.
+        /// </summary>
+        private void SkipWordCommand()
+        {
+            this.AddAnswer();
+            this.NextWord();
         }
     }
 }

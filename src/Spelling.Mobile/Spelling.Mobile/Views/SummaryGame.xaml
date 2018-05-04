@@ -3,14 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Spelling.Mobile.Views.SummaryGame"
              NavigationPage.HasBackButton="False"
-             Title="Resumen de jugada">
+             Title="Resumen de jugada"
+             Style="{StaticResource contentpage_default}">
     <StackLayout>
-        <Label Text="{Binding Model.Time, StringFormat='Tiempo son {0} segundos'}"></Label>
-        <Label Text="{Binding Model.CorrectAnswers, StringFormat='{0} respuestas correctas'}" TextColor="Green"></Label>
-        <Label Text="{Binding Model.IncorrectAnswers, StringFormat='{0} respuestas incorrectas'}" TextColor="Red"></Label>
-        <Label Text="Errores" FontSize="Large"></Label>
+
+        <Label Text="{Binding TimerText}" Style="{StaticResource label_time}"></Label>
+        <StackLayout>
+            <Grid>
+                <Image Grid.Column="0" Grid.Row="0" Source="good.png" WidthRequest="25" HeightRequest="30"></Image>
+                <Label Grid.Column="0" Grid.Row="1" Style="{StaticResource label_counter}" Text="{Binding Model.CorrectAnswers}" TextColor="Green"></Label>
+                <Image Grid.Column="1" Grid.Row="0" Source="bad.png" WidthRequest="25" HeightRequest="30"></Image>
+                <Label Grid.Column="1" Grid.Row="1" Style="{StaticResource label_counter}" Text="{Binding Model.IncorrectAnswers}" TextColor="Red"></Label>
+            </Grid>
+        </StackLayout>
+        <Label Text="Errores" FontSize="Large" TextColor="White" FontAttributes="Bold" HorizontalOptions="Center"></Label>
         <ListView
             ItemsSource="{Binding IncorrectAnswers}"
+            BackgroundColor="#f2f2f2"
+            Margin="5"
             >
             <ListView.ItemTemplate>
                 <DataTemplate>

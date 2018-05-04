@@ -1,12 +1,71 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Spelling.Mobile.Views.LoginView">
-    <StackLayout>
-        <Label Text="Email"></Label>
-        <Entry Placeholder="Ingresa tu correo" Text="{Binding Model.Email}"></Entry>
-        <Label Text="Password"></Label>
-        <Entry Placeholder="Ingresa tu clave" IsPassword="True" Text="{Binding Model.Password}"></Entry>
-        <Button Text="Enviar" Command="{Binding TryAuthenticate}"></Button>
-    </StackLayout>
+             xmlns:local="clr-namespace:Spelling.Mobile.MarkupExtensions"
+             x:Class="Spelling.Mobile.Views.LoginView"
+             Style="{StaticResource contentpage_default}"
+             >
+
+    <!--<ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="buttoncss" Target="Button">
+                
+                <Setter Property="TextColor" Value="White"></Setter>
+                
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>-->
+
+    
+    <RelativeLayout>
+        <StackLayout
+            x:Name="logo"
+            RelativeLayout.YConstraint="{ConstraintExpression
+                    Type=RelativeToParent,
+                    Property=Height,
+                    Factor = 0,
+                    Constant=20 }"
+            
+            RelativeLayout.WidthConstraint="{ConstraintExpression
+                    Type=RelativeToParent,
+                    Property=Width,
+                    Factor=1 }"
+                    
+                    HorizontalOptions="FillAndExpand"
+            
+                    Orientation="Vertical"
+            >
+            <Image
+                
+                Source="{local:EmbeddedImage Spelling.Mobile.Images.logo.png}"
+                HeightRequest="61"
+                WidthRequest="184"
+                HorizontalOptions="Center"
+                Margin="0,50,0,50"
+                ></Image>
+        </StackLayout>
+        
+
+        <StackLayout
+                RelativeLayout.YConstraint="{ConstraintExpression
+                                            Type=RelativeToView,
+                                            ElementName=logo,
+                                            Property=Height,
+                                            Factor=1,
+                                            Constant=1}"
+            
+                RelativeLayout.WidthConstraint="{ConstraintExpression
+                    Type=RelativeToParent,
+                    Property=Width,
+                    Factor=1 }"
+            
+                Margin="20"
+                HorizontalOptions="FillAndExpand">
+            <Label Text="Email" Style="{StaticResource label_default}"></Label>
+            <Entry Placeholder="Ingresa tu correo" Text="{Binding Model.Email}"  Style="{StaticResource entry_default}"></Entry>
+            <Label Text="Password" Style="{StaticResource label_default}"></Label>
+            <Entry Placeholder="Ingresa tu clave" IsPassword="True" Text="{Binding Model.Password}" Style="{StaticResource entry_default}" ></Entry>
+            <Button Text="Entrar" Command="{Binding TryAuthenticate}" Style="{StaticResource button_ok}"></Button>
+        </StackLayout>
+    </RelativeLayout>
 </ContentPage>
