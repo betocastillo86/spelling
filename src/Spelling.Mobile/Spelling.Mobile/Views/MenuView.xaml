@@ -4,16 +4,19 @@
              x:Class="Spelling.Mobile.Views.MenuView"
              Title="Escoge la modalidad"
              Style="{StaticResource contentpage_default}">
-    <StackLayout Margin="10">
-        <Label Text="Escoge el tema en el que quieres practicar:" Style="{StaticResource label_default}" ></Label>
-        <Button Text="Preguntas y respuestas" Command="{Binding ChooseMenu}" Style="{StaticResource button_image}" CommandParameter="Questions" Image="questions.png"></Button>
-        <Button Text="Adverbios de frencuencia" Command="{Binding ChooseMenu}" Style="{StaticResource button_image}" CommandParameter="AdverbsOfFrecuency" Image="time.png"></Button>
-        <Button Text="Adjetivos" Command="{Binding ChooseMenu}" Style="{StaticResource button_image}" CommandParameter="Adjectives" Image="adjectives.png"></Button>
-        <Button Text="Ropa" Command="{Binding ChooseMenu}" Style="{StaticResource button_image}" CommandParameter="Clothes" Image="clothes.png"></Button>
-        <Button Text="Cuerpo" Command="{Binding ChooseMenu}" Style="{StaticResource button_image}" CommandParameter="Body" Image="body.png"></Button>
-        <Button Text="Verbos regulares" Command="{Binding ChooseMenu}" Style="{StaticResource button_image}" CommandParameter="RegularVerbs" Image="regular.png"></Button>
-        <Button Text="Verbos irregulares" Command="{Binding ChooseMenu}" Style="{StaticResource button_image}" CommandParameter="IregularVerbs" Image="irregular.png"></Button>
-        <Button Text="Verbos frasales" Command="{Binding ChooseMenu}" Style="{StaticResource button_image}" CommandParameter="PhrasalVerbs" Image="phrasal.png"></Button>
-        <Button Text="Casa" Command="{Binding ChooseMenu}" Style="{StaticResource button_image}" CommandParameter="House" Image="house.png" ></Button>
-    </StackLayout>
+    <ScrollView>
+        <StackLayout Margin="10">
+            <Label Text="Escoge el tema en el que quieres practicar:" Style="{StaticResource label_default}" ></Label>
+            <Button Text="Adjetivos" Command="{Binding ChooseMenu}" Style="{StaticResource button_image}" CommandParameter="Adjectives" Image="adjectives.png"></Button>
+            <Button Text="Verbos regulares" Command="{Binding ChooseMenu}" Style="{StaticResource button_image}" CommandParameter="RegularVerbs" Image="regular.png"></Button>
+            <Button Text="Verbos irregulares" Command="{Binding ChooseMenu}" Style="{StaticResource button_image}" CommandParameter="IregularVerbs" Image="irregular.png"></Button>
+            <Button Text="Ropa" Command="{Binding ChooseMenu}" Style="{StaticResource button_image}" CommandParameter="Clothes" Image="clothes.png"></Button>
+            <Button Text="Cuerpo" Command="{Binding ChooseMenu}" Style="{StaticResource button_image}" CommandParameter="Body" Image="body.png"></Button>
+            <Button Text="Verbos frasales" Command="{Binding ChooseMenu}" Style="{StaticResource button_image}" CommandParameter="PhrasalVerbs" Image="phrasal.png"></Button>
+            <Button Text="Casa" Command="{Binding ChooseMenu}" Style="{StaticResource button_image}" CommandParameter="House" Image="house.png" ></Button>
+            <Button Text="Preguntas y respuestas" Command="{Binding ChooseMenu}" Style="{StaticResource button_image}" CommandParameter="Questions" Image="questions.png"></Button>
+            <Button Text="Adverbios de frencuencia" Command="{Binding ChooseMenu}" Style="{StaticResource button_image}" CommandParameter="AdverbsOfFrecuency" Image="time.png"></Button>
+        </StackLayout>
+    </ScrollView>
+    
 </ContentPage>

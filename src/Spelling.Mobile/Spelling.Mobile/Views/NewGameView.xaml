@@ -18,11 +18,16 @@
                 </Keyboard>
             </Entry.Keyboard>
         </Entry>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+            <Button Image="audio.png" HorizontalOptions="Center" Command="{Binding ListenWord}" FontSize="Small"></Button>
+            <Button Text="Ver" Command="{Binding ShowWord}" FontSize="Small"></Button>
+        </StackLayout>
+        
+        
         <Label Text="{Binding LeftWordsText}" Style="{StaticResource label_default}" HorizontalTextAlignment="Center"></Label>
 
         <Button Text="Siguiente" Style="{StaticResource button_newGameOptions}" TextColor="White" BackgroundColor="Green" Command="{Binding SaveWord}"></Button>
 
-        <Label Text="{Binding TimerText}" Style="{StaticResource label_time}" ></Label>
         <StackLayout>
             <Grid>
                 <Image Grid.Column="0" Grid.Row="0" Source="good.png" WidthRequest="25" HeightRequest="30"></Image>
@@ -31,6 +36,9 @@
                 <Label Grid.Column="1" Grid.Row="1" Style="{StaticResource label_counter}" Text="{Binding Summary.IncorrectAnswers}" TextColor="Red"></Label>
             </Grid>
         </StackLayout>
+        
+        <Label Text="{Binding TimerText}" Style="{StaticResource label_time}" ></Label>
+        
 
         
 

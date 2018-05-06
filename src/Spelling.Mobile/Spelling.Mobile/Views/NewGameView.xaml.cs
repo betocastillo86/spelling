@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------
 namespace Spelling.Mobile.Views
 {
+    using System.Threading.Tasks;
     using Spelling.Mobile.Domain.Enums;
     using Spelling.Mobile.Infraestructure;
     using Spelling.Mobile.ViewModels;
@@ -40,6 +41,22 @@ namespace Spelling.Mobile.Views
         {
             get => this.BindingContext as NewGameViewModel;
             set => this.BindingContext = value;
+        }
+
+        /// <summary>
+        /// Application developers can override this method to provide behavior when the back button is pressed.
+        /// </summary>
+        /// <returns>
+        /// To be added.
+        /// </returns>
+        protected override bool OnBackButtonPressed()
+        {
+            ////if (Application.Current.MainPage.DisplayAlert("No ha terminado la partida", "¿Estas seguro que deseas salir?", "Quedarse en la página", "Salir").Result)
+            ////{
+            ////    return true;
+            ////}
+
+            return base.OnBackButtonPressed();
         }
     }
 }

@@ -7,6 +7,7 @@ namespace Spelling.Mobile.ViewModels
 {
     using System;
     using System.Collections.Generic;
+    using System.Net.Http;
     using System.Threading;
     using System.Windows.Input;
     using Spelling.Mobile.Domain;
@@ -83,6 +84,8 @@ namespace Spelling.Mobile.ViewModels
             this.SaveWord = new Command(this.SaveWordCommand);
             this.SkipWord = new Command(this.SkipWordCommand);
             this.Exit = new Command(this.ExitCommand);
+            this.ListenWord = new Command(this.ListenWordCommand);
+            this.ShowWord = new Command(this.ShowWordCommand);
         }
 
         /// <summary>
@@ -126,12 +129,28 @@ namespace Spelling.Mobile.ViewModels
         }
 
         /// <summary>
+        /// Gets the listen word.
+        /// </summary>
+        /// <value>
+        /// The listen word.
+        /// </value>
+        public ICommand ListenWord { get; private set; }
+
+        /// <summary>
         /// Gets the save word.
         /// </summary>
         /// <value>
         /// The save word.
         /// </value>
         public ICommand SaveWord { get; private set; }
+
+        /// <summary>
+        /// Gets the show word command.
+        /// </summary>
+        /// <value>
+        /// The show word.
+        /// </value>
+        public ICommand ShowWord { get; private set; }
 
         /// <summary>
         /// Gets the skip word.
@@ -208,7 +227,7 @@ namespace Spelling.Mobile.ViewModels
             {
                 this.Summary.Time = this.countSecondsTimer;
 
-                await this.restService.Post<GameModel>("http://10.0.2.2:52017/api/v1/games", gameModel, this.workContext.CurrentToken?.Access_Token);
+                await this.restService.Post<GameModel>($"{App.ApiUrl}games", gameModel, this.workContext.CurrentToken?.Access_Token);
 
                 await Application.Current.MainPage.Navigation.PushAsync(new SummaryGame(this.Summary));
             }
@@ -286,6 +305,20 @@ namespace Spelling.Mobile.ViewModels
         }
 
         /// <summary>
+        /// Listens the word command.
+        /// </summary>
+        private async void ListenWordCommand()
+        {
+            using (var client = new HttpClient())
+            {
+                var stream = await client.GetStreamAsync($"https://translate.google.com/translate_tts?ie=UTF-8&q={this.CurrentWord.English}&tl=en&client=tw-ob");
+                var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+                player.Load(stream);
+                player.Play();
+            }
+        }
+
+        /// <summary>
         /// Loads the words.
         /// </summary>
         private async void LoadWords()
@@ -297,7 +330,7 @@ namespace Spelling.Mobile.ViewModels
 
             try
             {
-                this.Words = (await this.restService.Get<WordFilterModel, PaginationResponseModel<WordModel>>("http://10.0.2.2:52017/api/v1/words", filter, this.workContext?.CurrentToken.Access_Token))
+                this.Words = (await this.restService.Get<WordFilterModel, PaginationResponseModel<WordModel>>($"{App.ApiUrl}words", filter, this.workContext?.CurrentToken.Access_Token))
                                .Results;
 
                 this.InitGame();
@@ -328,6 +361,14 @@ namespace Spelling.Mobile.ViewModels
                 this.timer.Dispose();
                 this.SaveGame();
             }
+        }
+
+        /// <summary>
+        /// Shows the word command.
+        /// </summary>
+        private async void ShowWordCommand()
+        {
+            await Application.Current.MainPage.DisplayAlert("Palabra", this.currentWord.English, "Cerrar");
         }
 
         /// <summary>

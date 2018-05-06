@@ -150,7 +150,7 @@ namespace Spelling.Mobile.ViewModels
                 GroupType = this.GroupType
             };
 
-            this.BestScore = (await this.restService.Get<BestScoreFilterModel, PaginationResponseModel<BestScoreModel>>("http://10.0.2.2:52017/api/v1/bestscores", filter, this.workContext.CurrentToken.Access_Token))
+            this.BestScore = (await this.restService.Get<BestScoreFilterModel, PaginationResponseModel<BestScoreModel>>($"{App.ApiUrl}bestscores", filter, this.workContext.CurrentToken.Access_Token))
                 .Results.FirstOrDefault();
         }
 
@@ -167,7 +167,7 @@ namespace Spelling.Mobile.ViewModels
                 GroupType = this.GroupType
             };
 
-            this.LatestGames = (await this.restService.Get<GameFilterModel, PaginationResponseModel<GameModel>>("http://10.0.2.2:52017/api/v1/games", filter, this.workContext.CurrentToken.Access_Token)).Results;
+            this.LatestGames = (await this.restService.Get<GameFilterModel, PaginationResponseModel<GameModel>>($"{App.ApiUrl}games", filter, this.workContext.CurrentToken.Access_Token)).Results;
         }
     }
 }

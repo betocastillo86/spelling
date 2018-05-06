@@ -45,7 +45,7 @@
                 <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
             </Style>
             <Style x:Key="label_currentWord" TargetType="Label">
-                <Setter Property="FontSize" Value="35"></Setter>
+                <Setter Property="FontSize" Value="30"></Setter>
                 <Setter Property="FontAttributes" Value="Bold"></Setter>
                 <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
                 <Setter Property="TextColor" Value="White"></Setter>

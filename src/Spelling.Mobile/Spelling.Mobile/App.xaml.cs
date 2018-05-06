@@ -16,6 +16,11 @@ namespace Spelling.Mobile
     public partial class App : Application
     {
         /// <summary>
+        /// The API URL
+        /// </summary>
+        public static string ApiUrl = "http://betocastillo86-003-site6.htempurl.com/api/v1/";
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="App"/> class.
         /// </summary>
         public App()
@@ -24,7 +29,9 @@ namespace Spelling.Mobile
 
             ServiceRegister.Instance.Build();
 
-            this.MainPage = new LoginView();
+            var workContext = ServiceRegister.Instance.Resolve<IWorkContext>();
+
+            this.MainPage = !workContext.IsAuthenticated ? (Page)new LoginView() : (Page)new NavigationPage(new MenuView());
         }
 
         /// <summary>

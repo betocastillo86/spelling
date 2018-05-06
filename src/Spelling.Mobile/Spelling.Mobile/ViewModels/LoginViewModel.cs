@@ -41,7 +41,11 @@ namespace Spelling.Mobile.ViewModels
             this.restService = restService;
             this.workContext = workContext;
 
+#if DEBUG
             this.Model = new LoginModel() { Email = "admin@admin.com", Password = "123456" };
+#endif
+
+            this.Model = new LoginModel();
             this.TryAuthenticate = new Command(this.Authenticate);
         }
 
@@ -73,7 +77,7 @@ namespace Spelling.Mobile.ViewModels
                 parameters.Add("password", this.Model.Password);
                 parameters.Add("grant_type", "password");
 
-                var token = await this.restService.PostUrlEncoded<TokenModel>("http://10.0.2.2:52017/api/v1/auth", parameters);
+                var token = await this.restService.PostUrlEncoded<TokenModel>($"{App.ApiUrl}auth", parameters);
 
                 this.GetCurretUser(token);
             }
@@ -91,7 +95,7 @@ namespace Spelling.Mobile.ViewModels
         {
             try
             {
-                var user = await this.restService.Get<UserModel>("http://10.0.2.2:52017/api/v1/auth/current", authToken: token.Access_Token);
+                var user = await this.restService.Get<UserModel>($"{App.ApiUrl}auth/current", authToken: token.Access_Token);
 
                 this.workContext.SetNewToken(token, user);
 

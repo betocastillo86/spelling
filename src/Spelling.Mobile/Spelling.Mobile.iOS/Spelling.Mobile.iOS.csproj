@@ -176,4 +176,10 @@
   <ItemGroup>
     <BundleResource Include="Resources\bad.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\audio.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\mind.png" />
+  </ItemGroup>
 </Project>

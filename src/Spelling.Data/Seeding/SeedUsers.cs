@@ -24,6 +24,8 @@ namespace Spelling.Data.Seeding
             var users = new List<User>();
 
             users.Add(new User { Email = "admin@admin.com", Password = "de0395eac174d64f431eb79a30e3dac76cb936f4", Salt = "123456", CreationDate = DateTime.UtcNow });
+            users.Add(new User { Email = "gabriel.castillo86@gmail.com", Password = "de0395eac174d64f431eb79a30e3dac76cb936f4", Salt = "123456", CreationDate = DateTime.UtcNow });
+            users.Add(new User { Email = "erica.estefanny@gmail.com", Password = "de0395eac174d64f431eb79a30e3dac76cb936f4", Salt = "123456", CreationDate = DateTime.UtcNow });
 
             foreach (var item in users)
             {
