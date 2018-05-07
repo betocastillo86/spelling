@@ -9,15 +9,32 @@
 
         <Label Text="{Binding CurrentWord.Spanish}" Style="{StaticResource label_currentWord}"></Label>
 
-        <Entry Text="{Binding UserAnswer}" Style="{StaticResource entry_currentWord}">
-            <Entry.Keyboard>
-                <Keyboard x:FactoryMethod="Create">
-                    <x:Arguments>
-                        <KeyboardFlags>None</KeyboardFlags>
-                    </x:Arguments>
-                </Keyboard>
-            </Entry.Keyboard>
-        </Entry>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+            <Grid HorizontalOptions="FillAndExpand" IsVisible="{Binding ShowUserAnswerPast}">
+                <Entry Grid.Column="0" Grid.Row="0" Text="{Binding UserAnswer}" Style="{StaticResource entry_currentWord}" HorizontalOptions="FillAndExpand" >
+                    <Entry.Keyboard>
+                        <Keyboard x:FactoryMethod="Create">
+                            <x:Arguments>
+                                <KeyboardFlags>None</KeyboardFlags>
+                            </x:Arguments>
+                        </Keyboard>
+                    </Entry.Keyboard>
+                </Entry>
+                <Entry Grid.Column="1" Grid.Row="0" Text="{Binding UserAnswerPast}" Style="{StaticResource entry_currentWord}" IsVisible="{Binding ShowUserAnswerPast}" HorizontalOptions="FillAndExpand" ></Entry>
+                <Entry Grid.Column="2" Grid.Row="0" Text="{Binding UserAnswerPast2}" Style="{StaticResource entry_currentWord}" IsVisible="{Binding ShowUserAnswerPast2}" HorizontalOptions="FillAndExpand"></Entry>
+            </Grid>
+            <Entry Text="{Binding UserAnswer}" Style="{StaticResource entry_currentWord}" HorizontalOptions="FillAndExpand" IsVisible="{Binding HideUserAnswerPast}" >
+                <Entry.Keyboard>
+                    <Keyboard x:FactoryMethod="Create">
+                        <x:Arguments>
+                            <KeyboardFlags>None</KeyboardFlags>
+                        </x:Arguments>
+                    </Keyboard>
+                </Entry.Keyboard>
+            </Entry>
+        </StackLayout>
+        
+        
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
             <Button Image="audio.png" HorizontalOptions="Center" Command="{Binding ListenWord}" FontSize="Small"></Button>
             <Button Text="Ver" Command="{Binding ShowWord}" FontSize="Small"></Button>

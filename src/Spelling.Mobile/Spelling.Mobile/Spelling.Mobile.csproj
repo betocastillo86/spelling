@@ -16,6 +16,7 @@
     <PackageReference Include="autofac" Version="4.8.0" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.1" />
     <PackageReference Include="Xam.Plugin.SimpleAudioPlayer" Version="1.1.0" />
+    <PackageReference Include="Xam.Plugins.Settings" Version="4.0.0.7" />
     <PackageReference Include="Xamarin.Forms" Version="2.5.1.444934" />
   </ItemGroup>
 

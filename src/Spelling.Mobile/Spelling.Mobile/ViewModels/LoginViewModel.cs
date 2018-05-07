@@ -12,6 +12,7 @@ namespace Spelling.Mobile.ViewModels
     using Spelling.Mobile.Infraestructure;
     using Spelling.Mobile.Models;
     using Spelling.Mobile.Sevices;
+    using Spelling.Mobile.Views;
     using Xamarin.Forms;
 
     /// <summary>
@@ -43,10 +44,16 @@ namespace Spelling.Mobile.ViewModels
 
 #if DEBUG
             this.Model = new LoginModel() { Email = "admin@admin.com", Password = "123456" };
+#else
+            this.Model = new LoginModel();
 #endif
 
-            this.Model = new LoginModel();
             this.TryAuthenticate = new Command(this.Authenticate);
+
+            if (App.Token != null)
+            {
+                this.GetCurretUser(App.Token);
+            }
         }
 
         /// <summary>
@@ -104,6 +111,8 @@ namespace Spelling.Mobile.ViewModels
             catch (XamarinSpellingException)
             {
                 await Application.Current.MainPage.DisplayAlert("Entrar", "Los datos de autenticación son incorrectos", "Cerrar");
+
+                Application.Current.MainPage = new LoginView();
             }
         }
     }

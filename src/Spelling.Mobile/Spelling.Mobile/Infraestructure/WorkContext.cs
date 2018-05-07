@@ -52,6 +52,8 @@ namespace Spelling.Mobile.Infraestructure
         {
             this.currentToken = tokenModel;
             this.CurrentUser = currentUser;
+
+            App.Token = this.currentToken;
         }
     }
 }

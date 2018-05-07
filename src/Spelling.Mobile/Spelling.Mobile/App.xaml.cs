@@ -5,7 +5,11 @@
 //-----------------------------------------------------------------------
 namespace Spelling.Mobile
 {
+    using Newtonsoft.Json;
+    using Plugin.Settings;
+    using Plugin.Settings.Abstractions;
     using Spelling.Mobile.Infraestructure;
+    using Spelling.Mobile.Models;
     using Spelling.Mobile.Views;
     using Xamarin.Forms;
 
@@ -35,14 +39,42 @@ namespace Spelling.Mobile
         }
 
         /// <summary>
-        /// Application developers override this method to perform actions when the application starts.
+        /// Gets or sets the token.
+        /// </summary>
+        /// <value>
+        /// The token.
+        /// </value>
+        public static TokenModel Token
+        {
+            get
+            {
+                var tokenSaved = Settings.GetValueOrDefault("AuthToken", null);
+                return tokenSaved != null ? JsonConvert.DeserializeObject<TokenModel>(tokenSaved) : null;
+            }
+
+            set
+            {
+                Settings.AddOrUpdateValue("AuthToken", JsonConvert.SerializeObject(value));
+            }
+        }
+
+        /// <summary>
+        /// Gets the settings.
+        /// </summary>
+        /// <value>
+        /// The settings.
+        /// </value>
+        private static ISettings Settings => CrossSettings.Current;
+
+        /// <summary>
+        /// Application developers override this method to perform actions when the application resumes from a sleeping state.
         /// </summary>
         /// <remarks>
         /// To be added.
         /// </remarks>
-        protected override void OnStart()
+        protected override void OnResume()
         {
-            // Handle when your app starts
+            // Handle when your app resumes
         }
 
         /// <summary>
@@ -57,14 +89,14 @@ namespace Spelling.Mobile
         }
 
         /// <summary>
-        /// Application developers override this method to perform actions when the application resumes from a sleeping state.
+        /// Application developers override this method to perform actions when the application starts.
         /// </summary>
         /// <remarks>
         /// To be added.
         /// </remarks>
-        protected override void OnResume()
+        protected override void OnStart()
         {
-            // Handle when your app resumes
+            // Handle when your app starts
         }
     }
 }

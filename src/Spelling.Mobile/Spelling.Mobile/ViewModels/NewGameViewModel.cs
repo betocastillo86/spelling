@@ -50,9 +50,24 @@ namespace Spelling.Mobile.ViewModels
         private int currentWordIndex = 0;
 
         /// <summary>
+        /// The hide user answer past
+        /// </summary>
+        private bool hideUserAnswerPast = false;
+
+        /// <summary>
         /// The left words text
         /// </summary>
         private string leftWordsText = null;
+
+        /// <summary>
+        /// The show user answer past
+        /// </summary>
+        private bool showUserAnswerPast = false;
+
+        /// <summary>
+        /// The show user answer past2
+        /// </summary>
+        private bool showUserAnswerPast2 = false;
 
         /// <summary>
         /// The timer
@@ -68,6 +83,16 @@ namespace Spelling.Mobile.ViewModels
         /// The user answer
         /// </summary>
         private string userAnswer = null;
+
+        /// <summary>
+        /// The user answer past
+        /// </summary>
+        private string userAnswerPast = null;
+
+        /// <summary>
+        /// The user answer past 2
+        /// </summary>
+        private string userAnswerPast2 = null;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NewGameViewModel"/> class.
@@ -117,6 +142,18 @@ namespace Spelling.Mobile.ViewModels
         public GroupType GroupType { get; private set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether [hide user answer past].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [hide user answer past]; otherwise, <c>false</c>.
+        /// </value>
+        public bool HideUserAnswerPast
+        {
+            get => this.hideUserAnswerPast;
+            set => this.SetValue(ref this.hideUserAnswerPast, value);
+        }
+
+        /// <summary>
         /// Gets or sets the left words text.
         /// </summary>
         /// <value>
@@ -143,6 +180,30 @@ namespace Spelling.Mobile.ViewModels
         /// The save word.
         /// </value>
         public ICommand SaveWord { get; private set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether [show user answer past].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [show user answer past]; otherwise, <c>false</c>.
+        /// </value>
+        public bool ShowUserAnswerPast
+        {
+            get => this.showUserAnswerPast;
+            set => this.SetValue(ref this.showUserAnswerPast, value);
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether [show user answer past2].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [show user answer past2]; otherwise, <c>false</c>.
+        /// </value>
+        public bool ShowUserAnswerPast2
+        {
+            get => this.showUserAnswerPast2;
+            set => this.SetValue(ref this.showUserAnswerPast2, value);
+        }
 
         /// <summary>
         /// Gets the show word command.
@@ -190,6 +251,30 @@ namespace Spelling.Mobile.ViewModels
         {
             get => this.userAnswer;
             set => this.SetValue(ref this.userAnswer, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the user answer past.
+        /// </summary>
+        /// <value>
+        /// The user answer past.
+        /// </value>
+        public string UserAnswerPast
+        {
+            get => this.userAnswerPast;
+            set => this.SetValue(ref this.userAnswerPast, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the user answer past2.
+        /// </summary>
+        /// <value>
+        /// The user answer past2.
+        /// </value>
+        public string UserAnswerPast2
+        {
+            get => this.userAnswerPast2;
+            set => this.SetValue(ref this.userAnswerPast2, value);
         }
 
         /// <summary>
@@ -259,6 +344,8 @@ namespace Spelling.Mobile.ViewModels
         {
             this.GroupType = groupType;
             this.Summary = new SummaryGameModel();
+            this.ShowUserAnswerPast = this.ShowUserAnswerPast2 = groupType == GroupType.IregularVerbs;
+            this.HideUserAnswerPast = !this.ShowUserAnswerPast;
 
             this.LoadWords();
         }
@@ -268,6 +355,11 @@ namespace Spelling.Mobile.ViewModels
         /// </summary>
         private void AddAnswer()
         {
+            if (this.GroupType == GroupType.IregularVerbs)
+            {
+                this.UserAnswer = $"{this.userAnswer},{this.UserAnswerPast},{this.UserAnswerPast2}";
+            }
+
             var answer = new AnswerModel
             {
                 Answer = this.UserAnswer,
@@ -325,7 +417,7 @@ namespace Spelling.Mobile.ViewModels
         {
             var filter = new WordFilterModel();
             filter.GroupType = this.GroupType;
-            filter.PageSize = 500;
+            filter.PageSize = 50;
             filter.OrderBy = "Random";
 
             try
@@ -354,7 +446,7 @@ namespace Spelling.Mobile.ViewModels
                 this.Summary.LeftWords = this.currentWordIndex;
                 this.Summary.TotalWords = this.Words.Count;
                 this.LeftWordsText = $"{this.Summary.LeftWords}/{this.Summary.TotalWords}";
-                this.UserAnswer = string.Empty;
+                this.UserAnswer = this.UserAnswerPast = this.UserAnswerPast2 = string.Empty;
             }
             else
             {
